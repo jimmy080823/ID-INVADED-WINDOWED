@@ -8,7 +8,7 @@ import numpy as np
 import pyautogui
 from PIL import ImageGrab
 from pywinauto.findwindows import find_window,WindowNotFoundError
-from win32gui import SetForegroundWindow
+from pywinauto import Application
 
 winsize = list(pyautogui.size()) # The resolution of the monitor
 
@@ -176,6 +176,8 @@ class SketchWindow:
         try:
             hwnd = find_window(title=self.name)
             SetForegroundWindow(hwnd)
+            #app = Application().connect(process=<pid>)
+            hwnd.top_window().set_focus()
         except WindowNotFoundError:
             pass
 
